@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "title": "Effects of Microgravity on Plant Growth and Development in Space Habitats",
+    "authors": ["Dr. Sarah Chen", "Dr. Michael Rodriguez", "Dr. Aisha Patel"],
+    "abstract": "This study investigates the physiological and molecular changes in Arabidopsis thaliana when exposed to microgravity conditions aboard the International Space Station. Our findings reveal significant alterations in root development, phototropism, and gene expression patterns. These results have implications for developing sustainable food production systems for long-duration space missions.",
+    "year": 2024,
+    "keywords": ["microgravity", "plant biology", "space agriculture", "ISS"]
+  },
+  {
+    "id": "2",
+    "title": "Radiation Protection Strategies for Mars Mission Crews",
+    "authors": ["Dr. James Wilson", "Dr. Elena Volkov"],
+    "abstract": "Cosmic radiation poses one of the greatest risks to human health during interplanetary travel. This paper examines novel shielding materials and biological countermeasures to mitigate radiation damage. We present data from simulated Mars mission scenarios and propose an integrated protection framework combining physical barriers with pharmaceutical interventions.",
+    "year": 2024,
+    "keywords": ["radiation", "Mars missions", "crew health", "shielding"]
+  },
+  {
+    "id": "3",
+    "title": "Circadian Rhythm Disruption and Countermeasures in Low Earth Orbit",
+    "authors": ["Dr. Lisa Tanaka", "Dr. Robert Kumar", "Dr. Maria Santos"],
+    "abstract": "Astronauts in Low Earth Orbit experience 16 sunrises and sunsets daily, severely disrupting natural circadian rhythms. This longitudinal study tracked sleep patterns, hormone levels, and cognitive performance in crew members over six-month ISS missions. We evaluate the effectiveness of various lighting protocols and melatonin supplementation in maintaining healthy circadian cycles.",
+    "year": 2023,
+    "keywords": ["circadian rhythm", "sleep", "astronaut health", "LEO"]
+  },
+  {
+    "id": "4",
+    "title": "Bone Density Loss in Extended Spaceflight: Cellular Mechanisms and Therapeutic Approaches",
+    "authors": ["Dr. Thomas Anderson", "Dr. Yuki Nakamura"],
+    "abstract": "Astronauts lose approximately 1-2% of bone mass per month in microgravity, presenting a critical challenge for long-duration missions. Our research elucidates the molecular pathways involved in bone resorption under spaceflight conditions and evaluates novel bisphosphonate treatments combined with resistance exercise protocols. Results indicate significant improvements in bone mineral density retention.",
+    "year": 2023,
+    "keywords": ["bone density", "osteoporosis", "microgravity", "therapeutics"]
+  },
+  {
+    "id": "5",
+    "title": "Bacterial Behavior and Antibiotic Resistance in Microgravity Environments",
+    "authors": ["Dr. Patricia O'Connor", "Dr. Ahmed Hassan", "Dr. Sophie Laurent"],
+    "abstract": "Microbial pathogens exhibit altered virulence and accelerated mutation rates in space environments, raising concerns about infection management during missions. This study characterizes bacterial growth patterns, biofilm formation, and antibiotic susceptibility profiles in simulated and actual microgravity. Our findings suggest the need for revised antimicrobial protocols for space medicine.",
+    "year": 2024,
+    "keywords": ["microbiology", "antibiotic resistance", "space medicine", "pathogens"]
+  },
+  {
+    "id": "6",
+    "title": "Cardiovascular Adaptations to Prolonged Spaceflight and Reentry",
+    "authors": ["Dr. Carlos Mendez", "Dr. Ingrid Svensson"],
+    "abstract": "The cardiovascular system undergoes substantial remodeling during extended missions, including cardiac atrophy and orthostatic intolerance upon return to Earth. We present comprehensive cardiovascular monitoring data from astronauts before, during, and after missions up to one year in duration. Novel exercise countermeasures and post-flight rehabilitation protocols are evaluated for efficacy.",
+    "year": 2023,
+    "keywords": ["cardiovascular", "cardiac health", "exercise", "rehabilitation"]
+  },
+  {
+    "id": "7",
+    "title": "Neuroplasticity and Cognitive Function During Long-Duration Spaceflight",
+    "authors": ["Dr. Nina Kowalski", "Dr. David Park", "Dr. Rachel Green"],
+    "abstract": "Changes in brain structure and cognitive performance have been observed in astronauts following spaceflight. Using advanced neuroimaging and cognitive testing, we document alterations in gray matter volume, white matter integrity, and executive function during six-month missions. The study explores potential neuroprotective strategies including cognitive training and pharmacological interventions.",
+    "year": 2024,
+    "keywords": ["neuroplasticity", "cognition", "brain imaging", "neuroprotection"]
+  },
+  {
+    "id": "8",
+    "title": "Fluid Redistribution and Ocular Changes in Microgravity",
+    "authors": ["Dr. Julia Martinez", "Dr. Christopher Lee"],
+    "abstract": "Spaceflight-Associated Neuro-ocular Syndrome (SANS) affects a significant proportion of astronauts, causing vision impairment and structural changes to the eye. This research investigates the role of cephalad fluid shift in SANS pathogenesis and evaluates countermeasures including lower body negative pressure devices. Longitudinal ophthalmic assessments reveal critical insights for mission planning.",
+    "year": 2023,
+    "keywords": ["vision", "SANS", "fluid dynamics", "ophthalmology"]
+  },
+  {
+    "id": "9",
+    "title": "Immune System Dysregulation in Spaceflight Conditions",
+    "authors": ["Dr. Samuel Wright", "Dr. Fatima Al-Rashid", "Dr. Hans Mueller"],
+    "abstract": "Astronauts exhibit compromised immune function during and after spaceflight, increasing susceptibility to infections and reactivation of latent viruses. Our multi-omic analysis reveals transcriptional, proteomic, and metabolomic signatures of immune dysregulation. We propose targeted nutritional and pharmaceutical interventions to support immune health in space environments.",
+    "year": 2024,
+    "keywords": ["immunology", "immune function", "infection risk", "multi-omics"]
+  },
+  {
+    "id": "10",
+    "title": "Closed-Loop Life Support Systems: Bioregenerative Technologies for Deep Space Missions",
+    "authors": ["Dr. Anna Kowalczyk", "Dr. Raj Patel", "Dr. Emma Thompson"],
+    "abstract": "Sustainable life support for Mars missions and beyond requires bioregenerative systems integrating plant cultivation, waste recycling, and atmospheric regulation. This paper presents an integrated system design combining hydroponic agriculture, microbial bioreactors, and photobioreactors for oxygen generation and CO2 removal. Prototype testing demonstrates 85% closure in material loops with significant resource recovery.",
+    "year": 2024,
+    "keywords": ["life support", "bioregenerative systems", "sustainability", "deep space"]
+  }
+]

@@ -1,0 +1,145 @@
+import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Sparkles, Loader2 } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import publicationsData from "@/data/publications.json";
+
+const PublicationDetail = () => {
+  const { id } = useParams();
+  const { toast } = useToast();
+  const [summary, setSummary] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const publication = publicationsData.find((pub) => pub.id === id);
+
+  if (!publication) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="container mx-auto px-4 py-8">
+          <p className="text-center text-muted-foreground">Publication not found</p>
+        </div>
+      </div>
+    );
+  }
+
+  const handleSummarize = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/summarize", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ abstract: publication.abstract }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate summary");
+      }
+
+      const data = await response.json();
+      setSummary(data.summary);
+      toast({
+        title: "Summary Generated",
+        description: "AI has successfully summarized the publication.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate summary. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      
+      <main className="container mx-auto px-4 py-8">
+        <Button variant="ghost" asChild className="mb-6">
+          <Link to="/publications" className="flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Publications
+          </Link>
+        </Button>
+
+        <Card className="bg-gradient-to-br from-card to-card/50 border-accent/20">
+          <CardHeader>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <CardTitle className="text-3xl mb-4">
+                  {publication.title}
+                </CardTitle>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {publication.keywords.map((keyword, index) => (
+                    <Badge key={index} variant="secondary" className="bg-primary/20 text-accent">
+                      {keyword}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="text-muted-foreground">
+                  {publication.authors.join(", ")}
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Published: {publication.year}
+                </p>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-accent">Abstract</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {publication.abstract}
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <Button
+                onClick={handleSummarize}
+                disabled={loading}
+                className="bg-accent hover:bg-accent/90"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Summarize with AI
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {summary && (
+              <Card className="bg-primary/10 border-accent/30">
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-accent" />
+                    AI-Generated Summary
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-foreground leading-relaxed">{summary}</p>
+                </CardContent>
+              </Card>
+            )}
+          </CardContent>
+        </Card>
+      </main>
+    </div>
+  );
+};
+
+export default PublicationDetail;
