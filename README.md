@@ -1,75 +1,39 @@
-# React + TypeScript + Vite
+# KnowBiolS 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+KnowBiolS is a web platform that makes NASA’s scientific publications more accessible and usable.  
+Users can search NASA data, receive AI-powered summaries, and engage with insights in a simple interface.
 
-Currently, two official plugins are available:
+## Problem Statement
+NASA publishes thousands of research papers and datasets.  
+Accessing, understanding, and applying this knowledge remains a major challenge for students, researchers, and innovators.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Our Solution
+- A **FastAPI backend** that retrieves and processes NASA publications.
+- An **AI summarization layer** (Gemini + RAG) that makes research insights digestible.
+- A **modern web frontend** (Lovable AI) for intuitive interaction.
 
-## React Compiler
+## Features
+- 🔎 Search NASA publications
+- 🤖 AI-powered summarization
+- 📑 View results in clean, user-friendly interface
+- 🌍 Built for students, researchers, and policymakers
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech Stack
+- **Frontend:** React (generated via Lovable AI)
+- **Backend:** FastAPI (Python)
+- **AI:** Gemini + RAG-based summarization
+- **Data:** NASA Publications API
 
-Note: This will impact Vite dev & build performances.
+## Judging Criteria Mapping
+- **Impact:** Democratizes NASA’s knowledge, making research insights globally accessible.  
+- **Creativity:** First platform combining NASA data with real-time AI summaries.  
+- **Validity:** Built with FastAPI, React, and real NASA APIs for feasibility.  
+- **Relevance:** Publications are the *core dataset*, not a superficial add-on.  
+- **Presentation:** Clear workflow, demo-ready prototype, and storytelling-driven pitch.  
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Future Improvements
+- User authentication
+- Save/bookmark publications
+- Advanced filtering & topic clustering
+- Mobile-friendly version
