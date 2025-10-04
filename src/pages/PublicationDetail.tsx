@@ -1,31 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, Sparkles, Loader2, ExternalLink } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import publicationsData from "@/data/publications.json";
+// import publicationsData from "@/data/publications.json";
+import { Publication, fetchPublication} from "@/api.ts";
+import { pseudoRandomBytes } from "node:crypto";
 
 const PublicationDetail = () => {
   const { id } = useParams();
   const { toast } = useToast();
   const [summary, setSummary] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [publication, setPublication] = useState<Publication | null>(null);
 
-  const publication = publicationsData.find((pub) => pub.id === id);
+  // const publication = publicationsData.find((pub) => pub.id === id);
+
+  useEffect(() => {
+    if (!id) return;
+    fetchPublication(id)
+      .then(setPublication)
+      .catch(() => setPublication(null));
+  }, [id]);
 
   if (!publication) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <div className="container mx-auto px-4 py-8">
-          <p className="text-center text-muted-foreground">Publication not found</p>
-        </div>
-      </div>
-    );
-  }
+     return (
+       <div className="min-h-screen bg-background">
+         <Navigation />
+         <div className="container mx-auto px-4 py-8">
+           <p className="text-center text-muted-foreground">
+             Publication not found
+           </p>
+         </div>
+       </div>
+     );
+   }
+
+  // if (!pseudoRandomBytes) {
+  //   return (
+  //     <div className="min-h-screen bg-background">
+  //       <Navigation />
+  //       <div className="container mx-auto px-4 py-8">
+  //         <p className="text-center text-muted-foreground">Publication not found</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   const handleSummarize = async () => {
     setLoading(true);
@@ -62,7 +85,7 @@ const PublicationDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 py-8">
         <Button variant="ghost" asChild className="mb-6">
           <Link to="/publications" className="flex items-center gap-2">
@@ -80,7 +103,11 @@ const PublicationDetail = () => {
                 </CardTitle>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {publication.keywords.map((keyword, index) => (
-                    <Badge key={index} variant="secondary" className="bg-primary/20 text-accent">
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      className="bg-primary/20 text-accent"
+                    >
                       {keyword}
                     </Badge>
                   ))}
@@ -96,12 +123,36 @@ const PublicationDetail = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-accent">Abstract</h3>
+              <h3 className="text-xl font-semibold mb-3 text-accent">
+                Abstract
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
                 {publication.abstract}
               </p>
             </div>
 
+            {/* 👇 INSERT URLS HERE 👇 */}
+            {publication.urls && publication.urls.length > 0 && (
+              <div>
+                <h3 className="text-xl font-semibold mb-3 text-accent">
+                  Reference Sources
+                </h3>
+                <div className="flex flex-col space-y-2">
+                  {publication.urls.map((url, index) => (
+                    <a
+                      key={index}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:text-accent transition-colors duration-200 truncate"
+                    >
+                      <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                      <span className="truncate">{url}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex gap-4">
               <Button
                 onClick={handleSummarize}
