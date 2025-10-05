@@ -55,7 +55,7 @@ const PublicationDetail = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/summarize?title=${encodeURIComponent(publication.title)}&abstract=${encodeURIComponent(publication.abstract)}`,
+        `https://knowbiols-backend-d8gcc2beabaafnc7.canadacentral-01.azurewebsites.net/summarize?title=${encodeURIComponent(publication.title)}&abstract=${encodeURIComponent(publication.abstract)}`,
         {
         method: "POST",
         }
