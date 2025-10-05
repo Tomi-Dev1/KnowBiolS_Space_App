@@ -8,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 // import publicationsData from "@/data/publications.json";
 import { Publication, fetchPublication} from "@/api.ts";
-import { pseudoRandomBytes } from "node:crypto";
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
 
 const PublicationDetail = () => {
   const { id } = useParams();
@@ -53,20 +54,19 @@ const PublicationDetail = () => {
   const handleSummarize = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/summarize", {
+      const response = await fetch(
+        `http://127.0.0.1:8000/summarize?title=${encodeURIComponent(publication.title)}&abstract=${encodeURIComponent(publication.abstract)}`,
+        {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ abstract: publication.abstract }),
-      });
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to generate summary");
       }
 
-      const data = await response.json();
-      setSummary(data.summary);
+      const summaryText = await response.text();
+      setSummary(summaryText); // Set the state to the raw string
       toast({
         title: "Summary Generated",
         description: "AI has successfully summarized the publication.",
@@ -182,7 +182,14 @@ const PublicationDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground leading-relaxed">{summary}</p>
+                  <div
+                    className="prose dark:prose-invert max-w-none"
+                    style={{ whiteSpace: "pre-wrap" }}
+                  >
+                    <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                      {summary}
+                    </ReactMarkdown>
+                  </div>
                 </CardContent>
               </Card>
             )}
