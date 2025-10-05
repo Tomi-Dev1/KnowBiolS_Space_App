@@ -1,14 +1,59 @@
 import { Link } from "react-router-dom";
-import { Search, Network, BookOpen, TrendingUp } from "lucide-react";
+import { Search, Network, BookOpen, TrendingUp, Loader2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
+import { useEffect, useState } from "react";
+
+// Utility function to fetch the total count from the new endpoint
+const fetchPublicationCount = async (): Promise<number> => {
+  // IMPORTANT: Replace the mock URL with your actual backend host
+  const apiUrl = `https://knowbiols-backend-d8gcc2beabaafnc7.canadacentral-01.azurewebsites.net/publications/count`; 
+  
+  try {
+    const res = await fetch(apiUrl);
+    
+    if (!res.ok) {
+      throw new Error("Failed to fetch publication count from backend.");
+    }
+    
+    // The endpoint returns {"count": N}, so we extract 'count'.
+    const data: { count: number } = await res.json();
+    return data.count;
+
+  } catch (error) {
+    console.error("Error fetching publication count:", error);
+    // Return 0 or re-throw the error depending on desired error handling
+    return 0; 
+  }
+};
 
 const Dashboard = () => {
+  const [publicationCount, setPublicationCount] = useState<number | string | null>(null);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // useEffect hook to fetch data on component mount
+  useEffect(() => {
+    const fetchCount = async () => {
+      setIsLoading(true);
+      try {
+        const count = await fetchPublicationCount();
+        setPublicationCount(count);
+      } catch (error) {
+        // Use a placeholder on error
+        setPublicationCount("—");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCount();
+  }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16 space-y-4">
@@ -16,7 +61,8 @@ const Dashboard = () => {
             NASA Bioscience Publications
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore cutting-edge research in space bioscience, from microgravity effects to life support systems
+            Explore cutting-edge research in space bioscience, from microgravity
+            effects to life support systems
           </p>
         </div>
 
@@ -30,8 +76,17 @@ const Dashboard = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold text-foreground">10</p>
-              <p className="text-sm text-muted-foreground mt-2">Active research papers</p>
+              {/* Conditional rendering for loading state */}
+              {isLoading ? (
+                <Loader2 className="w-8 h-8 animate-spin text-accent" />
+              ) : (
+                <p className="text-4xl font-bold text-foreground">
+                  {publicationCount}
+                </p>
+              )}
+              <p className="text-sm text-muted-foreground mt-2">
+                Active research papers
+              </p>
             </CardContent>
           </Card>
 
@@ -44,7 +99,9 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <p className="text-4xl font-bold text-foreground">24</p>
-              <p className="text-sm text-muted-foreground mt-2">Interconnected concepts</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Interconnected concepts
+              </p>
             </CardContent>
           </Card>
 
@@ -57,7 +114,9 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <p className="text-4xl font-bold text-foreground">8</p>
-              <p className="text-sm text-muted-foreground mt-2">Active focus areas</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Active focus areas
+              </p>
             </CardContent>
           </Card>
         </div>
